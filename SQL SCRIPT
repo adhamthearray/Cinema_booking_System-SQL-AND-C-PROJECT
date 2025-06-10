@@ -1,0 +1,526 @@
+USE [cinemabookingsystem]
+GO
+/****** Object:  Table [dbo].[Admin_Movie]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Admin_Movie](
+	[Admin_ID] [int] NOT NULL,
+	[Movie_ID] [int] NOT NULL,
+	[Process] [varchar](50) NULL
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cast]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cast](
+	[Member_Name] [varchar](50) NULL,
+	[Member_ID] [int] NOT NULL,
+	[Role] [varchar](50) NULL,
+ CONSTRAINT [PK_Cast] PRIMARY KEY CLUSTERED 
+(
+	[Member_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Cinema_Branch]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Cinema_Branch](
+	[Cinema_Name] [varchar](50) NOT NULL,
+	[Cinema_Location] [varchar](50) NOT NULL,
+	[Base_Price] [money] NULL,
+	[Manger_ID] [int] NULL,
+ CONSTRAINT [PK_Cinema] PRIMARY KEY CLUSTERED 
+(
+	[Cinema_Name] ASC,
+	[Cinema_Location] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[CinemaBranch_Snack]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[CinemaBranch_Snack](
+	[Cinema_Name] [varchar](50) NOT NULL,
+	[Cinema_Location] [varchar](50) NOT NULL,
+	[Snack_Name] [varchar](50) NOT NULL,
+	[Available_Quantity] [int] NULL,
+ CONSTRAINT [PK_CinemaBranch_Snack] PRIMARY KEY CLUSTERED 
+(
+	[Cinema_Name] ASC,
+	[Cinema_Location] ASC,
+	[Snack_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[end_user]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[end_user](
+	[User_ID] [int] NOT NULL,
+	[First_Name] [varchar](50) NULL,
+	[Last_Name] [varchar](50) NULL,
+	[Age] [int] NULL,
+	[Phone_Number] [varchar](50) NULL,
+	[Email] [varchar](50) NULL,
+	[Password] [varchar](50) NULL,
+	[Role] [varchar](50) NULL,
+ CONSTRAINT [PK_User] PRIMARY KEY CLUSTERED 
+(
+	[User_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Has_a_snack]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Has_a_snack](
+	[Order_ID] [int] NOT NULL,
+	[Snack_Name] [varchar](50) NOT NULL,
+	[Quantity] [int] NULL,
+ CONSTRAINT [PK_Has a snack] PRIMARY KEY CLUSTERED 
+(
+	[Order_ID] ASC,
+	[Snack_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Movie&Cast]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Movie&Cast](
+	[Movie_ID] [int] NOT NULL,
+	[Member_ID] [int] NOT NULL,
+ CONSTRAINT [PK_Movie&Cast] PRIMARY KEY CLUSTERED 
+(
+	[Movie_ID] ASC,
+	[Member_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Movies]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Movies](
+	[Movie_Name] [varchar](50) NULL,
+	[Movie_ID] [int] NOT NULL,
+	[Duration] [int] NULL,
+	[Genre] [varchar](50) NULL,
+	[Rating] [float] NULL,
+	[Description] [varchar](50) NULL,
+	[Parental_Guide] [varchar](50) NULL,
+	[Release_Date] [date] NULL,
+	[Language] [varchar](50) NULL,
+	[Trailer] [varchar](50) NULL,
+	[Poster] [varchar](max) NULL,
+ CONSTRAINT [PK_Movies] PRIMARY KEY CLUSTERED 
+(
+	[Movie_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[orders]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[orders](
+	[Order_ID] [int] NOT NULL,
+	[Date] [date] NULL,
+	[Payment_Method] [varchar](50) NULL,
+	[User_ID_fk] [int] NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[Order_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Screens]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Screens](
+	[Screen_ID] [int] NOT NULL,
+	[Screen_Number] [int] NULL,
+	[Cinema_Name_fk] [varchar](50) NULL,
+	[Cinema_Locaction_fk] [varchar](50) NULL,
+	[Screen_Type_fk] [varchar](50) NULL,
+	[Number_Of_Seats] [int] NULL,
+ CONSTRAINT [PK_Screens] PRIMARY KEY CLUSTERED 
+(
+	[Screen_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Shows]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Shows](
+	[Show_ID] [int] NOT NULL,
+	[Screen_ID_fk] [int] NULL,
+	[Start_Time] [nvarchar](50) NULL,
+	[Date_Of_Show] [date] NULL,
+	[Movie_ID_fk] [int] NULL,
+ CONSTRAINT [PK_Show_1] PRIMARY KEY CLUSTERED 
+(
+	[Show_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Snack]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Snack](
+	[Snack_Name] [varchar](50) NOT NULL,
+	[Price] [int] NULL,
+ CONSTRAINT [PK_Snack] PRIMARY KEY CLUSTERED 
+(
+	[Snack_Name] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Ticket]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Ticket](
+	[Ticket_ID] [int] NOT NULL,
+	[Seat_Number] [int] NULL,
+	[Order_ID_fk] [int] NULL,
+	[Show_ID_fk] [int] NULL,
+	[Available] [nchar](10) NULL,
+ CONSTRAINT [PK_Ticket] PRIMARY KEY CLUSTERED 
+(
+	[Ticket_ID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+/****** Object:  Table [dbo].[Types_of_Screen]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE TABLE [dbo].[Types_of_Screen](
+	[Screen_Type] [varchar](50) NOT NULL,
+	[Seat_Factor] [float] NULL,
+ CONSTRAINT [PK_Types_of_Screen] PRIMARY KEY CLUSTERED 
+(
+	[Screen_Type] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON, OPTIMIZE_FOR_SEQUENTIAL_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+GO
+ALTER TABLE [dbo].[Admin_Movie]  WITH CHECK ADD  CONSTRAINT [FK_Admin_Movie_Admin_Movie] FOREIGN KEY([Admin_ID])
+REFERENCES [dbo].[end_user] ([User_ID])
+GO
+ALTER TABLE [dbo].[Admin_Movie] CHECK CONSTRAINT [FK_Admin_Movie_Admin_Movie]
+GO
+ALTER TABLE [dbo].[Admin_Movie]  WITH CHECK ADD  CONSTRAINT [FK_Admin_Movie_Movies] FOREIGN KEY([Movie_ID])
+REFERENCES [dbo].[Movies] ([Movie_ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Admin_Movie] CHECK CONSTRAINT [FK_Admin_Movie_Movies]
+GO
+ALTER TABLE [dbo].[Cinema_Branch]  WITH CHECK ADD  CONSTRAINT [FK_Cinema_Cinema] FOREIGN KEY([Manger_ID])
+REFERENCES [dbo].[end_user] ([User_ID])
+GO
+ALTER TABLE [dbo].[Cinema_Branch] CHECK CONSTRAINT [FK_Cinema_Cinema]
+GO
+ALTER TABLE [dbo].[CinemaBranch_Snack]  WITH CHECK ADD  CONSTRAINT [FK_CinemaBranch_Snack_Cinema] FOREIGN KEY([Cinema_Name], [Cinema_Location])
+REFERENCES [dbo].[Cinema_Branch] ([Cinema_Name], [Cinema_Location])
+GO
+ALTER TABLE [dbo].[CinemaBranch_Snack] CHECK CONSTRAINT [FK_CinemaBranch_Snack_Cinema]
+GO
+ALTER TABLE [dbo].[CinemaBranch_Snack]  WITH CHECK ADD  CONSTRAINT [FK_CinemaBranch_Snack_Snack] FOREIGN KEY([Snack_Name])
+REFERENCES [dbo].[Snack] ([Snack_Name])
+GO
+ALTER TABLE [dbo].[CinemaBranch_Snack] CHECK CONSTRAINT [FK_CinemaBranch_Snack_Snack]
+GO
+ALTER TABLE [dbo].[Has_a_snack]  WITH CHECK ADD  CONSTRAINT [FK_Has_a_snack_Order] FOREIGN KEY([Order_ID])
+REFERENCES [dbo].[orders] ([Order_ID])
+GO
+ALTER TABLE [dbo].[Has_a_snack] CHECK CONSTRAINT [FK_Has_a_snack_Order]
+GO
+ALTER TABLE [dbo].[Has_a_snack]  WITH CHECK ADD  CONSTRAINT [FK_Has_a_snack_Snack] FOREIGN KEY([Snack_Name])
+REFERENCES [dbo].[Snack] ([Snack_Name])
+GO
+ALTER TABLE [dbo].[Has_a_snack] CHECK CONSTRAINT [FK_Has_a_snack_Snack]
+GO
+ALTER TABLE [dbo].[Movie&Cast]  WITH CHECK ADD  CONSTRAINT [FK_Movie&Cast_Cast] FOREIGN KEY([Member_ID])
+REFERENCES [dbo].[Cast] ([Member_ID])
+GO
+ALTER TABLE [dbo].[Movie&Cast] CHECK CONSTRAINT [FK_Movie&Cast_Cast]
+GO
+ALTER TABLE [dbo].[Movie&Cast]  WITH CHECK ADD  CONSTRAINT [FK_Movie&Cast_Movies] FOREIGN KEY([Movie_ID])
+REFERENCES [dbo].[Movies] ([Movie_ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Movie&Cast] CHECK CONSTRAINT [FK_Movie&Cast_Movies]
+GO
+ALTER TABLE [dbo].[orders]  WITH CHECK ADD  CONSTRAINT [FK_Order_User] FOREIGN KEY([User_ID_fk])
+REFERENCES [dbo].[end_user] ([User_ID])
+GO
+ALTER TABLE [dbo].[orders] CHECK CONSTRAINT [FK_Order_User]
+GO
+ALTER TABLE [dbo].[Screens]  WITH CHECK ADD  CONSTRAINT [FK_Screens_Cinema] FOREIGN KEY([Cinema_Name_fk], [Cinema_Locaction_fk])
+REFERENCES [dbo].[Cinema_Branch] ([Cinema_Name], [Cinema_Location])
+GO
+ALTER TABLE [dbo].[Screens] CHECK CONSTRAINT [FK_Screens_Cinema]
+GO
+ALTER TABLE [dbo].[Screens]  WITH CHECK ADD  CONSTRAINT [FK_Screens_Types_of_Screen] FOREIGN KEY([Screen_Type_fk])
+REFERENCES [dbo].[Types_of_Screen] ([Screen_Type])
+GO
+ALTER TABLE [dbo].[Screens] CHECK CONSTRAINT [FK_Screens_Types_of_Screen]
+GO
+ALTER TABLE [dbo].[Shows]  WITH CHECK ADD  CONSTRAINT [FK_Show_Movies] FOREIGN KEY([Movie_ID_fk])
+REFERENCES [dbo].[Movies] ([Movie_ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Shows] CHECK CONSTRAINT [FK_Show_Movies]
+GO
+ALTER TABLE [dbo].[Shows]  WITH CHECK ADD  CONSTRAINT [FK_Show_Screens] FOREIGN KEY([Screen_ID_fk])
+REFERENCES [dbo].[Screens] ([Screen_ID])
+GO
+ALTER TABLE [dbo].[Shows] CHECK CONSTRAINT [FK_Show_Screens]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Order] FOREIGN KEY([Order_ID_fk])
+REFERENCES [dbo].[orders] ([Order_ID])
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Order]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [FK_Ticket_Show] FOREIGN KEY([Show_ID_fk])
+REFERENCES [dbo].[Shows] ([Show_ID])
+ON DELETE CASCADE
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [FK_Ticket_Show]
+GO
+ALTER TABLE [dbo].[end_user]  WITH CHECK ADD  CONSTRAINT [chk_age] CHECK  (([age]>=(13)))
+GO
+ALTER TABLE [dbo].[end_user] CHECK CONSTRAINT [chk_age]
+GO
+ALTER TABLE [dbo].[end_user]  WITH CHECK ADD  CONSTRAINT [CK_User_Role] CHECK  (([Role]='Customer' OR [Role]='Manager' OR [Role]='Admin'))
+GO
+ALTER TABLE [dbo].[end_user] CHECK CONSTRAINT [CK_User_Role]
+GO
+ALTER TABLE [dbo].[Movies]  WITH CHECK ADD  CONSTRAINT [CK_Movie_ParentalGuide] CHECK  (([Parental_Guide]='NC-17' OR [Parental_Guide]='R' OR [Parental_Guide]='PG-13' OR [Parental_Guide]='PG' OR [Parental_Guide]='G'))
+GO
+ALTER TABLE [dbo].[Movies] CHECK CONSTRAINT [CK_Movie_ParentalGuide]
+GO
+ALTER TABLE [dbo].[orders]  WITH CHECK ADD  CONSTRAINT [CK_Order_PaymentMethod] CHECK  (([Payment_Method]='Cash' OR [Payment_Method]='PayPal' OR [Payment_Method]='Debit Card' OR [Payment_Method]='Credit Card'))
+GO
+ALTER TABLE [dbo].[orders] CHECK CONSTRAINT [CK_Order_PaymentMethod]
+GO
+ALTER TABLE [dbo].[Screens]  WITH CHECK ADD  CONSTRAINT [CK_Screen_Type] CHECK  (([Screen_Type_fk]='4DX' OR [Screen_Type_fk]='VIP' OR [Screen_Type_fk]='3D' OR [Screen_Type_fk]='IMAX' OR [Screen_Type_fk]='Standard'))
+GO
+ALTER TABLE [dbo].[Screens] CHECK CONSTRAINT [CK_Screen_Type]
+GO
+ALTER TABLE [dbo].[Ticket]  WITH CHECK ADD  CONSTRAINT [CK_Ticket_Available] CHECK  (([Available]=(1) OR [Available]=(0)))
+GO
+ALTER TABLE [dbo].[Ticket] CHECK CONSTRAINT [CK_Ticket_Available]
+GO
+/****** Object:  StoredProcedure [dbo].[CalculateTicketPrice]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[CalculateTicketPrice]
+    @Show_ID INT,
+    @TicketPrice FLOAT OUTPUT
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @BasePrice FLOAT;
+    DECLARE @SeatFactor FLOAT;
+    
+    SELECT 
+        @BasePrice = Base_Price,
+        @SeatFactor = Seat_Factor
+    FROM 
+        Shows sh
+    JOIN 
+        Screens  ON Screen_ID_fk = Screen_ID
+    JOIN 
+        Cinema_Branch  ON Cinema_Name_fk = Cinema_Name
+        AND Cinema_Locaction_fk = Cinema_Location
+    JOIN 
+        Types_of_Screen ts ON Screen_Type_fk = Screen_Type
+    WHERE 
+        Show_ID = @Show_ID;
+    
+    SET @TicketPrice = @BasePrice * @SeatFactor;
+    
+    RETURN;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[GetUserOrdersWithDetails]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[GetUserOrdersWithDetails]
+    @UserID INT
+AS
+BEGIN
+    SELECT 
+	    Show_ID as hamada,
+        Order_ID,
+        Date,
+        Payment_Method,
+        Movie_Name,
+        Movie_ID,
+        Date,
+        Start_Time,
+        Ticket_ID,
+        Seat_Number,
+        Screen_Number,
+        Screen_Type_fk,
+        Cinema_Name,
+        Cinema_Location
+    FROM 
+        orders
+    JOIN 
+        Ticket ON Order_ID = Order_ID_fk
+    JOIN 
+        Shows ON Show_ID_fk = Show_ID
+    JOIN 
+        Movies ON Movie_ID_fk = Movie_ID
+    JOIN 
+        Screens ON Screen_ID_fk = Screen_ID
+    JOIN 
+        Cinema_Branch ON (Cinema_Name_fk = Cinema_Name 
+                          AND Cinema_Locaction_fk = Cinema_Location)
+    WHERE 
+        orders.User_ID_fk = @UserID;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertNewMovie]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertNewMovie]
+    @MovieName VARCHAR(50),
+    @Duration INT,
+    @Genre VARCHAR(50),
+    @Rating FLOAT,
+    @Description VARCHAR(50),
+    @Parental_Guide VARCHAR(50),
+    @Release_Date DATE,
+    @Language VARCHAR(50),
+    @Trailer VARCHAR(50) = NULL,
+    @Poster VARCHAR(MAX) = NULL
+AS
+BEGIN
+    SET NOCOUNT ON;
+    
+    DECLARE @NewMovieID INT;
+    
+    -- Get the next available Movie_ID
+    SELECT @NewMovieID = ISNULL(MAX(Movie_ID), 0) + 1 FROM Movies;
+    
+    -- Insert the new movie with all columns
+    INSERT INTO Movies (
+        Movie_Name, 
+        Movie_ID, 
+        Duration, 
+        Genre, 
+        Rating,
+        Description, 
+        Parental_Guide,
+        Release_Date,
+        Language,
+        Trailer,
+        Poster
+    )
+    VALUES (
+        @MovieName, 
+        @NewMovieID, 
+        @Duration, 
+        @Genre, 
+        @Rating,
+        @Description, 
+        @Parental_Guide,
+        @Release_Date,
+        @Language,
+        @Trailer,
+        @Poster
+    );
+    select @NewMovieID;
+    -- Return the new Movie_ID
+   ;
+END
+GO
+/****** Object:  StoredProcedure [dbo].[InsertNewUser]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[InsertNewUser]
+    @FirstName NVARCHAR(50),
+    @LastName NVARCHAR(50),
+    @Age INT,
+    @PhoneNumber NVARCHAR(20),
+    @Email NVARCHAR(100),
+    @Password NVARCHAR(100),
+    @Role NVARCHAR(20)
+AS
+BEGIN
+    SET NOCOUNT ON;
+
+    DECLARE @NewUserID INT;
+    
+    SELECT @NewUserID = ISNULL(MAX(User_ID), 0) + 1 FROM end_user;
+
+    INSERT INTO end_user (User_ID, First_name, Last_name, Age, Phone_Number, Email, Password, Role)
+    VALUES (@NewUserID, @FirstName, @LastName, @Age, @PhoneNumber, @Email, @Password, @Role);
+END
+GO
+/****** Object:  StoredProcedure [dbo].[sp_GetMovieShowtimes]    Script Date: 6/10/2025 5:31:32 PM ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+CREATE PROCEDURE [dbo].[sp_GetMovieShowtimes]
+    @CinemaName NVARCHAR(50),
+    @CinemaLocation NVARCHAR(50),
+    @MovieName NVARCHAR(50)
+AS
+BEGIN
+    SELECT 
+        s.Show_ID,
+        s.Start_Time,
+        s.Date_Of_Show,
+        sc.Screen_Type_fk AS Screen_Type
+    FROM Shows s
+    JOIN Screens sc ON s.Screen_ID_fk = sc.Screen_ID
+    JOIN Cinema_Branch cb ON (sc.Cinema_Name_fk = cb.Cinema_Name AND sc.Cinema_Locaction_fk = cb.Cinema_Location)
+    JOIN Movies m ON s.Movie_ID_fk = m.Movie_ID
+    WHERE cb.Cinema_Name = @CinemaName
+    AND cb.Cinema_Location = @CinemaLocation
+    AND m.Movie_Name = @MovieName
+    AND s.Date_Of_Show >= CAST(GETDATE() AS DATE)
+    ORDER BY s.Date_Of_Show, s.Start_Time
+END
+GO
